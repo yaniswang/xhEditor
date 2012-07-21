@@ -36,3 +36,10 @@ xhEditor默认基于[LGPL开源许可协议](http://xheditor.com/license/lgpl.tx
 * 如果您对源代码进行任何的修改或者衍生，涉及修改部分的额外代码和衍生的代码都必须采用LGPL协议开放源代码；
 * 无论您对源代码的修改程度如何，版权都归xhEditor开发团队所有，我们保留所有权利；
 * 无论您对源代码如何修改，都必需在明显和恰当地位置宣告版权声明 ( 请将版权信息留于关于按钮中 )；
+
+#链接向导：#
+
+* **官方网站**：[http://xheditor.com/](http://xheditor.com/)
+* **软件下载**：[http://xheditor.com/download](http://xheditor.com/download)
+* **技术手册**：[http://xheditor.com/manual](http://xheditor.com/manual)
+* **问题反馈**：[http://forum.xheditor.com/](http://forum.xheditor.com/)
