@@ -74,7 +74,7 @@ else{//标准表单式上传
 if($err==''){
 	$fileInfo=pathinfo($localName);
 	$extension=$fileInfo['extension'];
-	if(preg_match('/'.str_replace(',','|',$upExt).'/i',$extension))
+	if(preg_match('/^('.str_replace(',','|',$upExt).')$/i',$extension))
 	{
 		$bytes=filesize($tempPath);
 		if($bytes > $maxAttachSize)$err='请不要上传大小超过'.formatBytes($maxAttachSize).'的文件';
