@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     clean: ["dist", "temp"],
     concat: {
       dist: {
-        src: ['_src/core.js', '_src/lang.js', '_src/main.js'],
+        src: ['src/core.js', 'src/lang.js', 'src/main.js'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },

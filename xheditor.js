@@ -10,6 +10,6 @@
     });
     var scripts = ['core.js', 'lang.js', 'main.js'];
     for(var i=0;i<scripts.length;i++){
-        document.write( '<script type="text/javascript" src="'+editorRoot+'_src/' + scripts[i] + '"></script>' );
+        document.write( '<script type="text/javascript" src="'+editorRoot+'src/' + scripts[i] + '"></script>' );
     }
 })();
