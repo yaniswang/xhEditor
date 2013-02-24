@@ -50,7 +50,7 @@ xhEditor默认基于[LGPL开源许可协议](http://xheditor.com/license/lgpl.tx
 
 2. 解压并上传
 
-    解压压缩文件，将其中的xheditor-zh-cn.min.js以及xheditor_lang、xheditor_emot、xheditor_plugins和xheditor_skin四个文件夹上传到网站相应目录
+    解压压缩文件，将其中的xheditor.min.js以及xheditor_lang、xheditor_emot、xheditor_plugins和xheditor_skin四个文件夹上传到网站相应目录
 
     注：如果您网站中没有使用jQuery框架，也请一并上传jquery文件夹中的jquery-1.4.4.min.js
 
