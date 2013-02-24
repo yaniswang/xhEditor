@@ -1,0 +1,35 @@
+{
+  "name": "xheditor",
+  "title": "xhEditor",
+  "description": "xhEditor是一个基于jQuery开发的简单迷你并且高效的在线可视化HTML编辑器，基于网络访问并且兼容IE 6.0+,Firefox 3.0+,Opera 9.6+,Chrome 1.0+,Safari 3.22+。",
+  "version": "1.2.1",
+  "author": "yanis.wang@gmail.com",
+  "homepage": "http://xheditor.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yaniswang/xhEditor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yaniswang/xhEditor/issues"
+  },
+  "licenses": [
+    {
+      "type": "LGPL",
+      "url": "http://xheditor.com/license/lgpl.txt"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.0rc7",
+    "grunt-contrib-clean": "~0.4.0rc6",
+    "grunt-contrib-concat": "~0.1.2rc6",
+    "grunt-contrib-uglify": "~0.1.1rc6",
+    "grunt-contrib-copy": "~0.4.0rc7",
+    "grunt-contrib-compress": "~0.4.0rc7"
+  },
+  "keywords": [
+    "javascript",
+    "editor",
+    "WYSIWYG"
+  ]
+}

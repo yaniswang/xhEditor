@@ -91,10 +91,11 @@ function ubb2html(sUBB)
 
 function html2ubb(sHtml)
 {
+
 	var regSrc=/\s+src\s*=\s*(["']?)\s*(.+?)\s*\1(\s|$)/i,regWidth=/\s+width\s*=\s*(["']?)\s*(\d+(?:\.\d+)?%?)\s*\1(\s|$)/i,regHeight=/\s+height\s*=\s*(["']?)\s*(\d+(?:\.\d+)?%?)\s*\1(\s|$)/i,regBg=/(?:background|background-color|bgcolor)\s*[:=]\s*(["']?)\s*((rgb\s*\(\s*\d{1,3}%?,\s*\d{1,3}%?\s*,\s*\d{1,3}%?\s*\))|(#[0-9a-f]{3,6})|([a-z]{1,20}))\s*\1/i
 	var i,sUBB=String(sHtml),arrcode=new Array(),cnum=0;
 
-	sUBB=sUBB.replace(/\s*\r?\n\s*/g,'');
+	sUBB=sUBB.replace(/[ \t]*\r?\n[ \t]*/g,'');
 	
 	sUBB = sUBB.replace(/<(script|style)(\s+[^>]*?)?>[\s\S]*?<\/\1>/ig, '');
 	sUBB = sUBB.replace(/<!--[\s\S]*?-->/ig,'');

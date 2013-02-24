@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>xhEditor初始化代码生成向导 for xhEditor v1.1.14</title>
+<title>xhEditor初始化代码生成向导 for xhEditor</title>
 <script type="text/javascript" src="jquery/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="xheditor-zh-cn.js"></script>
+<script type="text/javascript" src="xheditor.js"></script>
+<script type="text/javascript" src="xheditor_lang/zh-cn.js"></script>
 <script type="text/javascript">
 $(pageInit);
 function pageInit()
@@ -63,7 +64,7 @@ body{
 </style>
 </head>
 <body>
-	<h1 class="top">xhEditor初始化代码生成向导 for xhEditor v1.1.14</h1>
+	<h1 class="top">xhEditor初始化代码生成向导 for xhEditor</h1>
 	<h2>1: 选择编辑器初始化模式</h2>
 	<div class="section"><select id="editorMode"><option value="1" selected="selected">Class初始化</option><option value="2">Javascript初始化</option></select></div>
 	<h2>2: 更改初始化参数</h2>
@@ -84,7 +85,7 @@ body{
 					<p><label><acronym title="禁用编辑区的右键菜单">disableContextmenu</acronym></label><select name="disableContextmenu"><option value="true">禁用</option><option value="false" selected="selected">不禁用 (default)</option></select> <span>禁用编辑区的右键菜单</span></p>
 					<p><label><acronym title="编辑器背景">background</acronym></label><input type="text" class="text" value="" name="background"> <span>设置编辑器背景，格式同CSS同名参数一致。建议直接设置textarea的css背景</span></p>
 					<p><label><acronym title="编辑器JS所在的根路径">editorRoot</acronym></label><input type="text" class="text" value="" name="editorRoot"> <span>编辑器JS文件所在的根路径，用在某些特殊情况下定位编辑器的根路径</span></p>
-					<p><label><acronym title="是否清理粘贴内容">cleanPaste</acronym></label><select name="cleanPaste"><option value="0">不清理</option><option value="1">简单清理Word</option><option value="2" selected="selected">深入清理Word (default)</option><option value="3">强制转文本</option></select> <span>是否清理粘贴HTML代码，清理Word或强制转文本</span></p>
+					<p><label><acronym title="是否清理粘贴内容">cleanPaste</acronym></label><select name="cleanPaste"><option value="0">不清理</option><option value="1" selected="selected">简单清理Word (default)</option><option value="2">深入清理Word</option><option value="3">强制转文本</option></select> <span>是否清理粘贴HTML代码，清理Word或强制转文本</span></p>
 					<p><label><acronym title="提交按钮的ID">submitID</acronym></label><input type="text" class="text" value="" name="submitID"> <span>非标准submit提交时指定提交按钮的ID值，以触发编辑值同步</span></p>
 				</div>
 			</fieldset>

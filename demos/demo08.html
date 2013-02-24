@@ -5,12 +5,13 @@
 <title>xhEditor demo8 : Ajax文件上传</title>
 <link rel="stylesheet" href="common.css" type="text/css" media="screen" />
 <script type="text/javascript" src="../jquery/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="../xheditor-zh-cn.js"></script>
+<script type="text/javascript" src="../xheditor.js"></script>
+<script type="text/javascript" src="../xheditor_lang/zh-cn.js"></script>
 <script type="text/javascript">
 $(pageInit);
 function pageInit()
 {
-	$.extend(xheditor.settings,{shortcuts:{'ctrl+enter':submitForm}});
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});
 	$('#elm1').xheditor({upLinkUrl:"upload.php",upLinkExt:"zip,rar,txt",upImgUrl:"upload.php",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"upload.php",upFlashExt:"swf",upMediaUrl:"upload.php",upMediaExt:"wmv,avi,wma,mp3,mid"});
 	$('#elm2').xheditor({upLinkUrl:"upload.php?immediate=1",upLinkExt:"zip,rar,txt",upImgUrl:"upload.php?immediate=1",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"upload.php?immediate=1",upFlashExt:"swf",upMediaUrl:"upload.php?immediate=1",upMediaExt:"wmv,avi,wma,mp3,mid"});
 	$('#elm3').xheditor({upLinkUrl:"uploadattach.php",upLinkExt:"zip,rar,txt"});
@@ -19,7 +20,7 @@ function pageInit()
 	$('#elm6').xheditor({upLinkUrl:"upload.php",upLinkExt:"zip,rar,txt",upImgUrl:"upload.php",upImgExt:"jpg,jpeg,gif,png",onUpload:insertUpload});
 }
 function insertUpload(arrMsg)
-{
+{console.log(arrMsg)
 	var i,msg;
 	for(i=0;i<arrMsg.length;i++)
 	{
@@ -45,6 +46,8 @@ function submitForm(){$('#frmDemo').submit();}
 		<li><a href="demo10.html"><span>iframe调用上传</span></a></li>
 		<li><a href="demo11.html"><span>异步加载</span></a></li>
 		<li><a href="demo12.html"><span>远程抓图</span></a></li>
+		<li><a href="demo13.html"><span>结合CKFinder</span></a></li>
+        <li><a href="demo14.html"><span>Markdown可视化</span></a></li>
 		<li><a href="../wizard.html" target="_blank"><span>生成代码</span></a></li>
 	</ul>
 </div>

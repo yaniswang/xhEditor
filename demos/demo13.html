@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>xhEditor demo13 : 结合CKFinder上传演示</title>
+<link rel="stylesheet" href="common.css" type="text/css" media="screen" />
+<script type="text/javascript" src="../jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../xheditor.js"></script>
+<script type="text/javascript" src="../xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript">
+$(pageInit);
+function pageInit()
+{
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	$('#elm1').xheditor({modalWidth:700,modalHeight:500,upBtnText:'浏览',upLinkUrl:"!ckfinder/upload.html",upImgUrl:"!ckfinder/upload.html?type=Images",upFlashUrl:"!ckfinder/upload.html?type=Flash",upMediaUrl:"!ckfinder/upload.html"});
+}
+function submitForm(){$('#frmDemo').submit();}
+</script>
+</head>
+<body>
+<div id="header-nav">
+	<ul>
+		<li><a href="demo01.html"><span>默认模式</span></a></li>
+		<li><a href="demo02.html"><span>自定义按钮</span></a></li>
+		<li><a href="demo03.html"><span>皮肤选择</span></a></li>
+		<li><a href="demo04.html"><span>其它选项</span></a></li>
+		<li><a href="demo05.html"><span>API交互</span></a></li>
+		<li><a href="demo06.html"><span>非utf-8编码调用</span></a></li>
+		<li><a href="demo07.html"><span>UBB可视化</span></a></li>
+		<li><a href="demo08.html"><span>Ajax上传</span></a></li>
+		<li><a href="demo09.html"><span>插件扩展</span></a></li>
+		<li><a href="demo10.html"><span>iframe调用上传</span></a></li>
+		<li><a href="demo11.html"><span>异步加载</span></a></li>
+		<li><a href="demo12.html"><span>远程抓图</span></a></li>
+		<li><a href="demo13.html"><span>结合CKFinder</span></a></li>
+        <li><a href="demo14.html"><span>Markdown可视化</span></a></li>
+		<li><a href="../wizard.html" target="_blank"><span>生成代码</span></a></li>
+	</ul>
+</div>
+<form id="frmDemo" method="post" action="show.php">
+	<h3>xhEditor demo13 : 结合CKFinder上传演示</h3>
+	<textarea id="elm1" name="elm1" rows="12" cols="80" style="width: 90%">
+&lt;p&gt;&lt;/p&gt;&lt;p&gt;当前实例调用的Javascript源代码为：&lt;/p&gt;&lt;p&gt;$('#elm1').xheditor({modalWidth:700,modalHeight:500,upBtnText:'浏览',upLinkUrl:&amp;quot;!ckfinder/upload.html&amp;quot;,upImgUrl:&amp;quot;!ckfinder/upload.html?type=Images&amp;quot;,upFlashUrl:&amp;quot;!ckfinder/upload.html?type=Flash&amp;quot;,upMediaUrl:&amp;quot;!ckfinder/upload.html&amp;quot;});&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;本页面演示结合CKFinder组件实现上传，也可以结合网上别的类似WEB文件管理器组件。&lt;/p&gt;&lt;p&gt;CKFinder组件为收费软件，如果有需要可到CKFinder主页购买：&lt;a href=&quot;http://ckfinder.com/&quot; target=&quot;_blank&quot;&gt;http://ckfinder.com/&lt;/a&gt;。&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://xheditor.com/manual/2#chapter3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+	</textarea><br /><br />
+	<br/><br />
+	<input type="submit" name="save" value="Submit" />
+	<input type="reset" name="reset" value="Reset" />
+</form>
+</body>
+</html>

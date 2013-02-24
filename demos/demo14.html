@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>xhEditor demo14 : Markdown可视化</title>
+<link rel="stylesheet" href="common.css" type="text/css" media="screen" />
+<style type="text/css">
+	.btnMap {
+		width:50px !important;
+		background:transparent url(googlemap/map.gif) no-repeat center center;
+	}
+	.btnCode {
+		background:transparent url(prettify/code.gif) no-repeat 16px 16px;
+		background-position:2px 2px;
+	}
+</style>
+<script type="text/javascript" src="../jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../xheditor.js"></script>
+<script type="text/javascript" src="../xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="../xheditor_plugins/showdown.js"></script>
+<script type="text/javascript" src="../xheditor_plugins/htmldomparser.js"></script>
+<script type="text/javascript" src="../xheditor_plugins/html2markdown.js"></script>		
+<script type="text/javascript">
+var markdownConverter = new Showdown.converter();
+function Md2HTML(md){
+	return markdownConverter.makeHtml(md);
+}
+function HTML2Md(html){
+	var md = HTML2Markdown(html);
+    md = md.replace(/&(lt|gt|amp|quot);/ig,function(all, t){
+        return {'lt':'<','gt':'>','amp':'&','quot':'"'}[t.toLowerCase()];
+    });
+    return md;
+}
+function pageInit()
+{
+	var markdownCSS = '<style>*{margin:0;padding:0;}p {margin:1em 0;line-height:1.5em;}table {font-size:inherit;font:100%;margin:1em;}table th{border-bottom:1px solid #bbb;padding:.2em 1em;}table td{border-bottom:1px solid #ddd;padding:.2em 1em;}input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}select,option{padding:0 .25em;}optgroup{margin-top:.5em;}img{border:0;max-width:100%;}abbr{border-bottom:none;}a{color:#4183c4;text-decoration:none;}a:hover{text-decoration:underline;}a code,a:link code,a:visited code{color:#4183c4;}h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6{border:0;}h1{font-size:170%;border-bottom:4px solid #aaa;padding-bottom:.5em;margin-top:1.5em;}h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}h2{font-size:150%;margin-top:1.5em;border-bottom:4px solid #e0e0e0;padding-bottom:.5em;}h3{margin-top:1em;}hr{border:1px solid #ddd;}ul{margin:1em 0 1em 2em;}ol{margin:1em 0 1em 2em;}ul li,ol li{margin-top:.5em;margin-bottom:.5em;}ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}dt{font-weight:bold;margin-left:1em;}dd{margin-left:2em;margin-bottom:1em;}pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>';
+	var plugins={
+		Code:{c:'btnCode',t:'插入代码',h:1,e:function(){
+			var _this=this;
+			var htmlCode='<div><textarea id="xheCodeValue" wrap="soft" spellcheck="false" style="width:300px;height:100px;" /></div><div style="text-align:right;"><input type="button" id="xheSave" value="确定" /></div>';
+			var jCode=$(htmlCode),
+				jValue=$('#xheCodeValue',jCode),
+				jSave=$('#xheSave',jCode);
+			jSave.click(function(){
+				_this.loadBookmark();
+				_this.pasteHTML('<pre>'+_this.domEncode(jValue.val())+'</pre>');
+				_this.hidePanel();
+				return false;	
+			});
+			_this.saveBookmark();
+			_this.showDialog(jCode);
+		}},
+		map:{c:'btnMap',t:'插入Google地图',e:function(){
+			var _this=this;
+			_this.saveBookmark();
+			_this.showIframeModal('Google 地图','googlemap/googlemap.html',function(v){
+				_this.loadBookmark();
+				_this.pasteHTML('<img src="'+v+'" />');
+			},538,404);
+		}}
+	};
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	$('#elm1').xheditor({
+		'tools':'Cut,Copy,Paste,Pastetext,|,Blocktag,FontSize,Bold,Italic,SelectAll,Removeformat,|,List,Outdent,Indent,|,Link,Unlink,Img,Hr,Emot,Code,map,|,Source,Print,Fullscreen',
+		'listBlocktag': [{n:'h1'},{n:'h2'},{n:'h3'},{n:'h4'},{n:'h5'},{n:'h6'}],
+		'plugins': plugins,
+		'beforeSetSource': Md2HTML,
+		'beforeGetSource': HTML2Md,
+		'loadCSS': markdownCSS
+	});
+}
+function submitForm(){$('#frmDemo').submit();}
+$(pageInit);
+</script>
+</head>
+<body>
+<div id="header-nav">
+	<ul>
+		<li><a href="demo01.html"><span>默认模式</span></a></li>
+		<li><a href="demo02.html"><span>自定义按钮</span></a></li>
+		<li><a href="demo03.html"><span>皮肤选择</span></a></li>
+		<li><a href="demo04.html"><span>其它选项</span></a></li>
+		<li><a href="demo05.html"><span>API交互</span></a></li>
+		<li><a href="demo06.html"><span>非utf-8编码调用</span></a></li>
+		<li><a href="demo07.html"><span>UBB可视化</span></a></li>
+		<li><a href="demo08.html"><span>Ajax上传</span></a></li>
+		<li><a href="demo09.html"><span>插件扩展</span></a></li>
+		<li><a href="demo10.html"><span>iframe调用上传</span></a></li>
+		<li><a href="demo11.html"><span>异步加载</span></a></li>
+		<li><a href="demo12.html"><span>远程抓图</span></a></li>
+		<li><a href="demo13.html"><span>结合CKFinder</span></a></li>
+		<li><a href="demo14.html"><span>Markdown可视化</span></a></li>
+		<li><a href="../wizard.html" target="_blank"><span>生成代码</span></a></li>
+	</ul>
+</div>
+<form id="frmDemo" method="post" action="show.php">
+	<h3>xhEditor demo14 : Markdown可视化</h3>
+	<textarea id="elm1" name="elm1" rows="30" cols="80" style="width: 90%">
+# Markdown可视化演示
+
+这个DEMO演示了如何基于xhEditor实现Markdown语法的可视化编辑。
+
+初始化代码如下：
+
+	var markdownCSS = '&lt;style&gt;*{margin:0;padding:0;}p {margin:1em 0;line-height:1.5em;}table {font-size:inherit;font:100%;margin:1em;}table th{border-bottom:1px solid #bbb;padding:.2em 1em;}table td{border-bottom:1px solid #ddd;padding:.2em 1em;}input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}select,option{padding:0 .25em;}optgroup{margin-top:.5em;}img{border:0;max-width:100%;}abbr{border-bottom:none;}a{color:#4183c4;text-decoration:none;}a:hover{text-decoration:underline;}a code,a:link code,a:visited code{color:#4183c4;}h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6{border:0;}h1{font-size:170%;border-bottom:4px solid #aaa;padding-bottom:.5em;margin-top:1.5em;}h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}h2{font-size:150%;margin-top:1.5em;border-bottom:4px solid #e0e0e0;padding-bottom:.5em;}h3{margin-top:1em;}hr{border:1px solid #ddd;}ul{margin:1em 0 1em 2em;}ol{margin:1em 0 1em 2em;}ul li,ol li{margin-top:.5em;margin-bottom:.5em;}ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}dt{font-weight:bold;margin-left:1em;}dd{margin-left:2em;margin-bottom:1em;}pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}&lt;/style&gt;';
+	var plugins={
+		Code:{c:'btnCode',t:'插入代码',h:1,e:function(){
+			var _this=this;
+			var htmlCode='&lt;div&gt;&lt;textarea id=&quot;xheCodeValue&quot; wrap=&quot;soft&quot; spellcheck=&quot;false&quot; style=&quot;width:300px;height:100px;&quot; /&gt;&lt;/div&gt;&lt;div style=&quot;text-align:right;&quot;&gt;&lt;input type=&quot;button&quot; id=&quot;xheSave&quot; value=&quot;确定&quot; /&gt;&lt;/div&gt;';
+			var jCode=$(htmlCode),
+				jValue=$('#xheCodeValue',jCode),
+				jSave=$('#xheSave',jCode);
+			jSave.click(function(){
+				_this.loadBookmark();
+				_this.pasteHTML('&lt;pre&gt;'+_this.domEncode(jValue.val())+'&lt;/pre&gt;');
+				_this.hidePanel();
+				return false;	
+			});
+			_this.saveBookmark();
+			_this.showDialog(jCode);
+		}},
+		map:{c:'btnMap',t:'插入Google地图',e:function(){
+			var _this=this;
+			_this.saveBookmark();
+			_this.showIframeModal('Google 地图','googlemap/googlemap.html',function(v){
+				_this.loadBookmark();
+				_this.pasteHTML('&lt;img src=&quot;'+v+'&quot; /&gt;');
+			},538,404);
+		}}
+	};
+	$('#elm1').xheditor({
+		'tools':'Cut,Copy,Paste,Pastetext,|,Blocktag,FontSize,Bold,Italic,SelectAll,Removeformat,|,List,Outdent,Indent,|,Link,Unlink,Img,Hr,Emot,Code,map,|,Source,Print,Fullscreen',
+		'listBlocktag': [{n:'h1'},{n:'h2'},{n:'h3'},{n:'h4'},{n:'h5'},{n:'h6'}],
+		'plugins': plugins,
+		'beforeSetSource': Md2HTML,
+		'beforeGetSource': HTML2Md,
+		'loadCSS': markdownCSS
+	});
+
+# 感谢
+
+感谢以下两个开源组件提供HTML和Markdown语法之间的转换实现。
+
+1. [https://github.com/kates/html2markdown](https://github.com/kates/html2markdown)
+2. [https://github.com/coreyti/showdown](https://github.com/coreyti/showdown)
+
+	</textarea><br /><br />
+	<br/><br />
+	<input type="submit" name="save" value="Submit" />
+	<input type="reset" name="reset" value="Reset" />
+</form>
+</body>
+</html>
