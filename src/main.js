@@ -563,7 +563,8 @@
 		}
 		this.processHTML=function(sHtml,mode)
 		{
-			var appleClass=' class="Apple-style-span"';
+			var appleClass=' class="Apple-style-span"',
+				arrFontsize = settings.listFontsize;
 			if(mode==='write')
 			{//write
 				sHtml=sHtml.replace(/(<(\/?)(\w+))((?:\s+[\w\-:]+\s*=\s*(?:"[^"]*"|'[^']*'|[^>\s]+))*)\s*((\/?)>)/g,function(all,left,end1,tag,attr,right,end2){
@@ -1067,6 +1068,7 @@
 			}
 			function addIndent(){results.push('\r\n');if(lvl>0){var tabs=lvl;while(tabs--)results.push("\t");}}
 			//font转style
+			var arrFontsize = settings.listFontsize;
 			function font2style(all,tag,attrs,content)
 			{
 				if(!attrs)return content;
