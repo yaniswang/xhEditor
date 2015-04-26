@@ -1,0 +1,94 @@
+#main{
+	padding:15px 0;
+}
+#right{
+	float:right;
+	width:260px;
+}
+#download div{
+	text-align:center;
+	padding:10px 0;
+}
+#downloadBtn a{
+	display:inline-block;
+	width:200px;height:38px;line-height:18px;
+	background:url(/img/downloadbtn.gif) center center no-repeat;
+	padding:8px 0;
+	color:#993300;
+	text-decoration:none;
+}
+#downloadBtn strong{
+	font-size:14px;
+}
+#download-relate a{
+	line-height:18px;
+	text-decoration:none;
+}
+#download-relate a:hover{text-decoration:underline;}
+#down-demo{padding:0 0 1px 18px;background:url(/img/icons.gif) no-repeat 0 0;}
+#down-manual{padding:0 0 1px 18px;background:url(/img/icons.gif) no-repeat 0 -16px;}
+#down-bug{padding:0 0 1px 18px;background:url(/img/icons.gif) no-repeat 0 -32px;}
+#down-donate{padding:0 0 1px 18px;background:url(/img/icons.gif) no-repeat 0 -48px;}
+#qa{
+	margin-top:10px;
+}
+#qa div ul{
+	margin:10px 0;padding:0;padding-left:30px;
+	line-height:20px;
+}
+#logolink{padding-top:10px;text-align:center;}
+
+#left{
+	margin-right:270px;
+}
+#banner{
+	border:1px solid #7BB6D8;
+	-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;
+	height:170px;
+	background:url(/img/banner.png) no-repeat;
+}
+#bannerinfo{
+	float:right;
+	width:180px;
+	border-left:1px solid #7BB6D8;
+	-moz-border-radius:0 5px 5px 0;-webkit-border-radius:0 5px 5px 0;border-radius:0 5px 5px 0;
+	height:150px;
+	background:url(/img/bannerbg.png) #E2EEF6;
+	padding:10px;
+}
+#bannerinfo h3{font-size:14px;}
+#bannerinfo p{line-height:1.4;}
+#features{
+	padding:20px 0;
+}
+#features .fLine{clear:left;}
+#features .fItem{
+	float:left;
+	width:50%;
+	line-height:1.5;
+}
+#features .fItem div{
+	margin:15px 5px 15px 45px;
+}
+#features .fItem h3{margin:3px 0;font-size:14px;}
+#features .f1{background:url(/img/feature1.gif) no-repeat 5px 15px;}
+#features .f2{background:url(/img/feature2.gif) no-repeat 5px 15px;}
+#features .f3{background:url(/img/feature3.gif) no-repeat 5px 15px;}
+#features .f4{background:url(/img/feature4.gif) no-repeat 5px 15px;}
+#features .f5{background:url(/img/feature5.gif) no-repeat 5px 15px;}
+#features .f6{background:url(/img/feature6.gif) no-repeat 5px 15px;}
+#link{
+	margin:10px 0;
+	border-top:1px solid #ccc;
+	padding:10px;
+	clear:both;
+}
+#msg{
+	clear:both;
+}
+#msg h2{
+	color:red;
+}
+#msg div{
+	padding:5px 0 20px 20px;
+}

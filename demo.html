@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>xhEditor在线演示</title>
+<meta name="description" content="xhEditor是一个基于jQuery开发的简单迷你并且高效的在线可视化HTML编辑器，基于网络访问并且兼容IE 6.0+,Firefox 3.0+,Opera 9.6+,Chrome 1.0+,Safari 3.22+。xhEditor基于Javascript开发，可应用在任何服务端语言环境，如：PHP、ASP.NET、JAVA等。" />
+<meta name="copyright" content="xhEditor.com" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<style type="text/css">
+#main{
+	margin:20px;
+	border:1px solid #E1E1E1;
+	-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;
+	padding:20px;
+}
+#main h1{
+	margin:0;
+	border-bottom:1px solid #ccc;
+	padding-bottom:3px;
+	font-size:18px;
+}
+.demoarea li{
+	float:left;
+	width:380px;
+	line-height:18px;
+}
+.btnMap {
+	width:50px !important;
+	background:transparent url(demos/googlemap/map.gif) no-repeat center center;
+}
+.btnCode {
+	background:transparent url(demos/prettify/code.gif) no-repeat 16px 16px;
+	background-position:2px 2px;
+}
+#googlead{
+	padding-bottom:10px;
+}
+</style>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="js/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="js/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript">
+$(pageInit);
+var editor;
+function pageInit()
+{
+	var plugins={
+		Code:{c:'btnCode',t:'插入代码',h:1,e:function(){
+			var _this=this;
+			var htmlCode='<div><select id="xheCodeType"><option value="html">HTML/XML</option><option value="js">Javascript</option><option value="css">CSS</option><option value="php">PHP</option><option value="java">Java</option><option value="py">Python</option><option value="pl">Perl</option><option value="rb">Ruby</option><option value="cs">C#</option><option value="c">C++/C</option><option value="vb">VB/ASP</option><option value="">其它</option></select></div><div><textarea id="xheCodeValue" wrap="soft" spellcheck="false" style="width:300px;height:100px;" /></div><div style="text-align:right;"><input type="button" id="xheSave" value="确定" /></div>';			var jCode=$(htmlCode),jType=$('#xheCodeType',jCode),jValue=$('#xheCodeValue',jCode),jSave=$('#xheSave',jCode);
+			jSave.click(function(){
+				_this.loadBookmark();
+				_this.pasteHTML('<pre class="prettyprint lang-'+jType.val()+'">'+_this.domEncode(jValue.val())+'</pre>');
+				_this.hidePanel();
+				return false;	
+			});
+			_this.saveBookmark();
+			_this.showDialog(jCode);
+		}},
+		map:{c:'btnMap',t:'插入Google地图',e:function(){
+			var _this=this;
+			_this.saveBookmark();
+			_this.showIframeModal('Google 地图','demos/googlemap/googlemap.html',function(v){
+				_this.loadBookmark();
+				_this.pasteHTML('<img src="'+v+'" />');
+			},538,404);
+		}}
+	};
+	editor=$('#elm1').xheditor({upLinkUrl:'demos/upload.php?immediate=1',upImgUrl:'demos/upload.php?immediate=1',upFlashUrl:'demos/upload.php?immediate=1',upMediaUrl:'demos/upload.php?immediate=1',localUrlTest:/^https?:\/\/[^\/]*?(xheditor\.com)\//i,remoteImgSaveUrl:'demos/saveremoteimg.php',emots:{
+		msn:{name:'MSN',count:40,width:22,height:22,line:8},
+		pidgin:{name:'Pidgin',width:22,height:25,line:8,list:{smile:'微笑',cute:'可爱',wink:'眨眼',laugh:'大笑',victory:'胜利',sad:'伤心',cry:'哭泣',angry:'生气',shout:'大骂',curse:'诅咒',devil:'魔鬼',blush:'害羞',tongue:'吐舌头',envy:'羡慕',cool:'耍酷',kiss:'吻',shocked:'惊讶',sweat:'汗',sick:'生病',bye:'再见',tired:'累',sleepy:'睡了',question:'疑问',rose:'玫瑰',gift:'礼物',coffee:'咖啡',music:'音乐',soccer:'足球',good:'赞同',bad:'反对',love:'心',brokenheart:'伤心'}},
+		ipb:{name:'IPB',width:20,height:25,line:8,list:{smile:'微笑',joyful:'开心',laugh:'笑',biglaugh:'大笑',w00t:'欢呼',wub:'欢喜',depres:'沮丧',sad:'悲伤',cry:'哭泣',angry:'生气',devil:'魔鬼',blush:'脸红',kiss:'吻',surprised:'惊讶',wondering:'疑惑',unsure:'不确定',tongue:'吐舌头',cool:'耍酷',blink:'眨眼',whistling:'吹口哨',glare:'轻视',pinch:'捏',sideways:'侧身',sleep:'睡了',sick:'生病',ninja:'忍者',bandit:'强盗',police:'警察',angel:'天使',magician:'魔法师',alien:'外星人',heart:'心动'}}
+	},plugins:plugins,loadCSS:'<style>pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>',shortcuts:{'ctrl+enter':submitForm}});
+}
+function submitForm(){$('#frmDemo').submit();}
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="header-nav">
+				<a href="/">首页</a> | <a href="/about.html">关于xhEditor</a> | 在线演示 | <a href="/case.html">成功案例</a> | <a href="/download.html">免费下载</a> | <a href="/wizard.html">参数向导</a> | <a href="/manual.html">技术手册</a> | <a href="/donate.html">捐赠</a>
+			</div>
+			<a href="http://xheditor.com" title="xhEditor开源HTML编辑器"><img src="img/xheditor-logo.gif" alt="xhEditor" /></a>
+		</div>
+		<div id="main">
+			<div id="googlead">
+				<script type="text/javascript"><!--
+				google_ad_client = "ca-pub-5810815588149991";
+				/* xhEditor演示 */
+				google_ad_slot = "9710706241";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</div>
+			<form id="frmDemo" method="post" action="showdemo.php">
+				<textarea id="elm1" name="elm1" style="width:860px;height:180px;background:url(img/demobg.jpg) no-repeat right bottom fixed">Hello xhEditor!</textarea><br /><span style="color:#ccc;">编辑区域中按快捷键Ctrl+Enter提交表单</span><br /><br />
+				<input type="submit" name="save" value="提交" />
+				<input type="reset" name="reset" value="重置" />
+			</form><br />
+			<h1>API接口演示：</h1>
+			<div class="demoarea">
+				<ol>
+					<li><a href="javascript:;" onclick="editor=$('#elm1').xheditor();return false;">$('#elm1').xheditor()</a> (初始化编辑器)</li>
+					<li><a href="javascript:;" onclick="$('#elm1').xheditor(false);return false;">$('#elm1').xheditor(false)</a> (卸载编辑器)</li>
+					<li><a href="javascript:;" onclick="editor.focus();return false;">focus()</a> (设置焦点)</li>
+					<li><a href="javascript:;" onclick="editor.setSource('<p>aaa1</p>');return false;">setSource('&lt;p&gt;aaa1&lt;/p&gt;')</a> (设置源代码1)</li>
+					<li><a href="javascript:;" onclick="$('#elm1').val('<p>aaa2</p>');return false;">$('#elm1').val('&lt;p&gt;aaa2&lt;/p&gt;')</a> (设置源代码2)</li>
+					<li><a href="javascript:;" onclick="alert(editor.getSource());return false;">getSource()</a> (获取源代码1)</li>
+					<li><a href="javascript:;" onclick="alert($('#elm1').val());return false;">$('#elm1').val()</a> (获取源代码2)</li>
+					<li><a href="javascript:;" onclick="editor.appendHTML('<strong>添加在尾部</strong>');return false;">appendHTML('&lt;strong&gt;添加在尾部&lt;/strong&gt;')</a> (结尾添加HTML)</li>
+					<li><a href="javascript:;" onclick="alert(editor.getSelect());return false;">getSelect()</a> (获取选择HTML)</li>
+					<li><a href="javascript:;" onclick="alert(editor.getSelect('text'));return false;">getSelect('text')</a> (获取选择文本)</li>
+					<li><a href="javascript:;" onclick="editor.pasteHTML('<strong>粘贴的内容</strong>');return false;">pasteHTML('&lt;strong&gt;粘贴的内容&lt;/strong&gt;')</a> (粘贴HTML)</li>
+					<li><a href="javascript:;" onclick="editor.pasteText('<strong>粘贴的内容</strong>');return false;">pasteText('&lt;strong&gt;粘贴的内容&lt;/strong&gt;')</a> (粘贴文本)</li>
+					<li><a href="javascript:;" onclick="alert(editor.formatXHTML('<b>abc</b>'));return false;">formatXHTML('&lt;b&gt;abc&lt;/b&gt;')</a> (格式XHTML)</li>
+					<li><a href="javascript:;" onclick="editor.toggleSource();return false;">toggleSource()</a> (切换源代码)</li>
+					<li><a href="javascript:;" onclick="editor.toggleSource(true);return false;">toggleSource(true)</a> (切换到源代码)</li>
+					<li><a href="javascript:;" onclick="editor.toggleFullscreen(true);return false;">toggleFullscreen(true)</a> (切换成全屏)</li>
+					<li><a href="javascript:;" onclick="editor.toggleShowBlocktag();return false;">toggleShowBlocktag()</a> (切换块标记显示)</li>
+					<li><a href="javascript:;" onclick="alert(editor.settings.upLinkExt);return false;">alert(settings.upLinkExt)</a> (显示设置值)</li>
+					<li><a href="javascript:;" onclick="editor.exec('About');return false;">exec('About')</a> (触发关于按钮)</li>
+				</ol><span class="clearfloat" />
+			</div><br /><br />
+			<h1>更多演示：</h1>
+			<div class="demoarea">
+				<ol>
+					<li><a href="demos/demo01.html" target="_blank">demo01.html</a> (默认模式)</li>
+					<li><a href="demos/demo02.html" target="_blank">demo02.html</a> (自定义按钮)</li>
+					<li><a href="demos/demo03.html" target="_blank">demo03.html</a> (皮肤选择)</li>
+					<li><a href="demos/demo04.html" target="_blank">demo04.html</a> (其它选项)</li>
+					<li><a href="demos/demo05.html" target="_blank">demo05.html</a> (Javascript API交互)</li>
+					<li><a href="demos/demo06.html" target="_blank">demo06.html</a> (非utf-8编码网页调用)</li>
+					<li><a href="demos/demo07.html" target="_blank">demo07.html</a> (UBB可视化编辑)</li>
+					<li><a href="demos/demo08.html" target="_blank">demo08.html</a> (Ajax文件上传)</li>
+					<li><a href="demos/demo09.html" target="_blank">demo09.html</a> (插件扩展)</li>
+					<li><a href="demos/demo10.html" target="_blank">demo10.html</a> (iframe调用文件上传)</li>
+					<li><a href="demos/demo11.html" target="_blank">demo11.html</a> (异步加载)</li>
+					<li><a href="demos/demo12.html" target="_blank">demo12.html</a> (远程抓图)</li>
+					<li><a href="demos/demo13.html" target="_blank">demo13.html</a> (结合CKFinder)</li>
+                    <li><a href="demos/demo14.html" target="_blank">demo14.html</a> (Markdown可视化编辑)</li>
+				</ol><span class="clearfloat" />
+			</div><br />
+			<div class="pageBottom"><a href="http://weibo.com/yaniswang" target="_blank" title="关注我们"><img src="img/weibo_s.gif" alt="我们的微博"></a> <span title="Top" onclick="window.scrollTo(0,0);"></span></div>
+		</div>
+		<div id="footer">
+			<div id="footer-body">
+				<div id="copyright">Copyright &copy <a href="http://xheditor.com/" target="_blank">xhEditor.com</a>. All rights reserved. | <a href="http://www.miibeian.gov.cn/" target="_blank">浙ICP备11026403号</a> | <script src="http://s15.cnzz.com/stat.php?id=5179999&web_id=5179999" language="JavaScript"></script></div>
+				<a href="/aboutus.html">关于我们</a> | <a href="/contact.html">联系我们</a> | <a href="/links.html">友情链接</a> | <a href="/contributors.html">贡献者</a> | <a href="http://xheditor.com/" onclick="return addBookmark('xhEditor开源HTML编辑器','http://xheditor.com');" title="xhEditor开源HTML编辑器" rel="sidebar">收藏本站</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

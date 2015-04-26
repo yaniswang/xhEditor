@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>xhEditor进阶使用 - xhEditor技术手册</title>
+<meta name="description" content="xhEditor是一个基于jQuery开发的简单迷你并且高效的在线可视化HTML编辑器，基于网络访问并且兼容IE 6.0+,Firefox 3.0+,Opera 9.6+,Chrome 1.0+,Safari 3.22+。xhEditor基于Javascript开发，可应用在任何服务端语言环境，如：PHP、ASP.NET、JAVA等。" />
+<meta name="copyright" content="xhEditor.com" />
+<link rel="stylesheet" type="text/css" href="/css/common.css" />
+<style type="text/css">
+#main{
+	margin:20px;
+	border:1px solid #E1E1E1;
+	-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;
+	padding:20px;
+	font-size:14px;
+}
+#main h1,#main h2{
+	margin:0;
+	border-bottom:1px solid #ccc;
+	padding-bottom:3px;
+}
+#main h1{font-size:18px;}
+#main h2{font-size:15px;color:#FF4314;}
+#main h3{margin:0;font-size:13px;}
+#main dl{margin:1em 0 1em 2em;}
+</style>
+<link rel="stylesheet" type="text/css" href="/js/prettify/prettify.css" />
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/prettify/prettify.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="header-nav">
+				<a href="/">首页</a> | <a href="/about.html">关于xhEditor</a> | <a href="/demo.html">在线演示</a> | <a href="/case.html">成功案例</a> | <a href="/download.html">免费下载</a> | <a href="/wizard.html">参数向导</a> | <a href="/manual.html">技术手册</a> | <a href="/donate.html">捐赠</a>
+			</div>
+			<a href="http://xheditor.com" title="xhEditor开源HTML编辑器"><img src="/img/xheditor-logo.gif" alt="xhEditor" /></a>
+		</div>
+		<div id="main">
+			<h1>2. xhEditor进阶使用</h1>
+			<dl>
+				<dt>2.1. <a href="/manual/2.html#chapter1">进阶使用指导</a></dt>
+				<dt>2.2. <a href="/manual/2.html#chapter2">初始化参数列表</a></dt>
+				<dt>2.3. <a href="/manual/2.html#chapter3">API函数接口列表</a></dt>
+				<dt>2.4. <a href="/manual/2.html#chapter4">上传程序开发规范</a></dt>
+				<dt>2.5. <a href="/manual/2.html#chapter5">插件开发指南</a></dt>
+				<dt>2.6. <a href="/manual/2.html#chapter6">皮肤设计指南</a></dt>
+				<dt>2.7. <a href="/manual/2.html#chapter7">关于二次开发</a></dt>
+			</dl><br />
+			<h2><a name="chapter1"></a>2.1. 进阶使用指导</h2>
+			<p>阅读本章节请先阅读：<a href="1.html">xhEditor入门基础</a>，若你已经熟悉xhEditor的基本使用，请往下继续。</p>
+			<p>xhEditor提供两种方式初始化编辑器：</p>
+			<ul>
+				<li>
+					方法1：利用class属性来初始化和传递各种初始化参数，例：
+					<pre class="prettyprint"> class="xheditor {skin:'default'}"</pre>
+				</li>
+				<li>
+					方法2：利用xhEditor提供的jQuery插件接口来实现对特定textarea的初始化和传递参数，例：
+					<pre class="prettyprint">$('#elm1').xheditor();<br />或者<br />$('#elm1').xheditor({tools:'mini'});</pre>
+				</li>
+			</ul>
+			<p>特别说明：两种初始化方法只能选择其中一种使用，如果两种方法的代码同时存在页面中，方法2的代码不会有任何效果。</p>
+			<p>我们更倾向于推荐大家使用方法1，因为更简单易用，不涉及任何的Javascript代码。通过简单的参数设置即可定制各种效果的编辑器界面，简单易用且功能强大。</p>
+			<p>如果想实现更加复杂的交互应用，或者希望xhEditor编辑器能够和自己的Javascript代码实现互相访问，那么你可以选择使用方法2，相对具有更大的自由空间。</p>
+			<p>xhEditor也提供了即时的卸载编辑器方法：</p>
+			<pre class="prettyprint">$('#elm1').xheditor(false);</pre><br />
+			<h2><a name="chapter2"></a>2.2. 初始化参数列表</h2>
+			<p>初始化参数示例代码：</p>
+			<pre class="prettyprint">$('#elm1').xheditor({tools:'full',skin:'default',showBlocktag:true,internalScript:false,internalStyle:false,width:300,height:200,loadCSS:'http://xheditor.com/test.css',fullscreen:true,sourceMode:true,forcePtag:true,upImgUrl:"upload.php",upImgExt:"jpg,jpeg,gif,png"});</pre>
+			<p>初始化参数列表：</p>
+			<ol>
+				<li>
+					<h3>tools：自定义工具按钮</h3>
+					<pre class="prettyprint">参数值：full(完全),mfull(多行完全),simple(简单),mini(迷你)<br />或者自定义字符串，例如：'Cut,Copy,Paste,Pastetext,|,Source,Fullscreen,About'<br /><br />完整按钮表：<br />|：分隔符<br />/：强制换行<br />Cut：剪切<br />Copy：复制<br />Paste：粘贴<br />Pastetext：文本粘贴<br />Blocktag：段落标签<br />Fontface：字体<br />FontSize：字体大小<br />Bold：粗体<br />Italic：斜体<br />Underline：下划线<br />Strikethrough：中划线<br />FontColor：字体颜色<br />BackColor：字体背景色<br />SelectAll：全选<br />Removeformat：删除文字格式<br />Align：对齐<br />List：列表<br />Outdent：减少缩进<br />Indent：增加缩进<br />Link：超链接<br />Unlink：删除链接<br />Anchor：锚点<br />Img：图片<br />Flash：Flash动画<br />Media：Windows media player视频<br />Hr：插入水平线<br />Emot：表情<br />Table：表格<br />Source：切换源代码模式<br />Preview：预览当前代码<br />Print：打印<br />Fullscreen：切换全屏模式<br />About：关于xhEditor</pre>
+				</li>
+				<li>
+					<h3>skin：皮肤风格选择</h3>
+					<pre class="prettyprint">参数值：default(默认风格),o2007blue(Office 2007 蓝色),o2007silver(Office 2007 银色),vista(Vista),nostyle(NoStyle)</pre>
+				</li>
+				<li>
+					<h3>layerShadow：阴影的深度(按钮面板和模式窗口的背景阴影) </h3>
+					<pre class="prettyprint">参数值：0(不显示阴影),大于0的数值(显示阴影并设置阴影的深度)</pre>
+				</li>
+				<li>
+					<h3>clickCancelDialog：点击任意位置取消按钮面板功能 </h3>
+					<pre class="prettyprint">参数值：默认true(开启点击取消功能),false(关闭点击取消功能，必需要点击“取消”按钮才能关闭按钮面板)</pre>
+				</li>
+				<li>
+					<h3>showBlocktag：显示段落标签</h3>
+					<pre class="prettyprint">参数值：true(显示段落标签),false(不显示)</pre>
+				</li>
+				<li>
+					<h3>linkTag：样式链接link标签保留状态</h3>
+					<pre class="prettyprint">参数值：true(保留样式链接link标签),false(清理样式链接link标签)</pre>
+				</li>
+				<li>
+					<h3>internalScript：内部JS代码保留状态 </h3>
+					<pre class="prettyprint">参数值：true(保留内部JS代码),false(清理内部JS代码)</pre>
+				</li>
+				<li>
+					<h3>inlineScript：内联JS代码保留状态 </h3>
+					<pre class="prettyprint">参数值：true(保留内联JS代码),false(清理内联JS代码)</pre>
+				</li>
+				<li>
+					<h3>internalStyle：内部样式保留状态 </h3>
+					<pre class="prettyprint">参数值：true(保留内部样式),false(清理内部样式)</pre>
+				</li>
+				<li>
+					<h3>inlineStyle：内联样式保留状态 </h3>
+					<pre class="prettyprint">参数值：true(保留内联样式),false(清理内联样式)</pre>
+				</li>
+				<li>
+					<h3>width：编辑器宽度 </h3>
+					<pre class="prettyprint">参数值：不带单位的数字，例：300</pre>
+				</li>
+				<li>
+					<h3>height：编辑器高度 </h3>
+					<pre class="prettyprint">参数值：不带单位的数字，例：100</pre>
+				</li>
+				<li>
+					<h3>background：编辑器背景 </h3>
+					<pre class="prettyprint">参数值：字符串，例：url(test.gif) no-repeat，设置编辑器背景，格式同CSS同名参数一致。建议直接设置textarea的css背景<br />备注：v1.1.1新添加</pre>
+				</li>
+				<li>
+					<h3>loadCSS：加载样式 </h3>
+					<pre class="prettyprint">参数值：URL地址、URL数组以及直接内部样式，例如：'1.css'、['1.css','2.css']、'&lt;style&gt;body{font-size:20px;}&lt;/style&gt;'&lt;br /&gt;备注：1.0.0 RC3新添加加载内部样式功能</pre>
+				</li>
+				<li>
+					<h3>fullscreen：默认全屏显示 </h3>
+					<pre class="prettyprint">参数值：true(全屏大小),false(标准大小)</pre>
+				</li>
+				<li>
+					<h3>sourceMode：默认源代码模式</h3>
+					<pre class="prettyprint">参数值：true(源代码模式),false(编辑模式)</pre>
+				</li>
+				<li>
+					<h3>forcePtag：强制P标签 </h3>
+					<pre class="prettyprint">参数值：true(强制使用P标签),false(不强制),默认true</pre>
+				</li>
+				<li>
+					<h3>cleanPaste：是否清理粘贴的HTML代码 </h3>
+					<pre class="prettyprint">参数：0(不做任何清理),1(简单清理Word),2(深入清理Word),3(强制转文本),默认为1简单清理Word<br />说明：若网站应用需要保留更多的Word样式效果，请设置此值为1，不过产生的HTML代码体积会大大增大<br />备注：1.1.4版本中新变更，原为wordDeepClean和forcePasteText两个参数</pre>
+				</li>
+				<li>
+					<h3>disableContextmenu：禁用编辑区的右键菜单 </h3>
+					<pre class="prettyprint">参数值：true(禁用右键菜单),false(不禁用),默认false<br />备注：v1.1.0新添加</pre>
+				</li>
+				<li>
+					<h3>editorRoot：编辑器JS文件所在的根路径</h3>
+					<pre class="prettyprint">参数值：编辑器所在的根路径，用在某些特殊情况下定位编辑器的根路径，默认为空，读取默认的编辑器根路径<br />备注：v1.1.0新添加</pre>
+				</li>
+				<li>
+					<h3>shortcuts：自定义键盘快捷方式 </h3>
+					<pre class="prettyprint">参数：快捷键对应事件代码的对象数组<br />示例：{'ctrl+enter':function(){$('#frmTest').submit();}}<br />备注：1.0.0 beta2新添加</pre>
+				</li>
+				<li>
+					<h3>urlBase：相对URL地址的基地址</h3>
+					<pre class="prettyprint">参数：字符串的URL地址，用以解决前后台不在同一路径的资源定位问题<br />备注：1.1.0新添加</pre>
+				</li>
+				<li>
+					<h3>urlType：本地URL地址强制转换方式选择</h3>
+					<pre class="prettyprint">参数：abs(绝对路径),root(根路径),rel(相对路径)<br />备注：1.0.0 beta2新添加,v1.1.0版中名字由localUrl变更为urlType</pre>
+				</li>
+				<li>
+					<h3>emotPath：修改表情图片的URL根路径</h3>
+					<pre class="prettyprint">参数：字符串的URL地址，默认为空，指向编辑器路径下的默认表情<br />备注：1.1.0新添加</pre>
+				</li>
+				<li>
+					<h3>emotMark：是否在表情img标签上标注emot属性 </h3>
+					<pre class="prettyprint">参数：true(标注),false(不标注),默认为false<br />说明：若使用了ubb插件，请设置此属性为true<br />备注：1.0.0 beta2新添加</pre>
+				</li>
+				<li>
+					<h3>emots：添加自定义表情</h3>
+					<pre class="prettyprint">参数：可定义多个JSON对象数组，示例如下：{qq:{name:'QQ',count:55,width:25,height:25,line:11},msn:{name:'MSN',count:40,width:22,height:22,line:8}}<br />        name：表情分组名<br />        count：表情数量<br />        list：表情列表，例：{test1:'表情1',test2:'表情2'}，键名代表文件名，扩展名必需为gif，键值代表alt信息<br />        width：单个表情区域宽度，必需大于或等于表情最大宽度<br />        height：单表情区域高度，必需大于或等于表情最大高度<br />        line：单行显示表情数量<br />        说明：count和list必需选其中一个值，注意count模式插入表情img的alt为空<br />备注：1.0.0 beta2新添加</pre>
+				</li>
+				<li>
+					<h3>hoverExecDelay：悬停自动执行延迟的时间 </h3>
+					<pre class="prettyprint">参数：数值(单位毫秒)，默认为100，设置为-1关闭此功能<br />备注：1.0.0 rc2新添加</pre>
+				</li>
+				<li>
+					<h3>defLinkText：超链接的默认文字</h3>
+					<pre class="prettyprint">参数值：字符串(默认值：“点击打开链接”)<br />说明：只在不选择任何内容的情况下才会用到这个参数值</pre>
+				</li>
+				<li>
+					<h3>modalWidth：showModal弹出窗口的默认宽度 </h3>
+					<pre class="prettyprint">参数值：数值，默认为350<br />说明：弹出窗口的默认宽度</pre>
+				</li>
+				<li>
+					<h3>modalHeight：showModal弹出窗口的默认高度 </h3>
+					<pre class="prettyprint">参数值：数值，默认为220<br />说明：弹出窗口的默认高度</pre>
+				</li>
+				<li>
+					<h3>modalTitle：showModal弹出窗口是否显示上方的标题栏 </h3>
+					<pre class="prettyprint">参数值：true(显示),false(不显示)<br />说明：控制弹出窗口是否显示上方的标题栏，默认为显示，若需要显示一个更定制个性化的iframe窗口，可通过此参数隐藏上方的标题栏</pre>
+				</li>
+				<li>
+					<h3>upBtnText：上传按钮的文字 </h3>
+					<pre class="prettyprint">参数值：任意字符串,默认值：“上传”<br />备注：1.0.0 beta2新添加</pre>
+				</li>
+				<li>
+					<h3>html5Upload：是否开启HTML5上传支持 </h3>
+					<pre class="prettyprint">参数值：true(允许),false(不允许),默认为true允许<br />说明：本功能需要浏览器支持HTML5上传<br />备注：1.0.0 Final新添加</pre>
+				</li>
+				<li>
+					<h3>upMultiple：允许一次上传多少个文件 </h3>
+					<pre class="prettyprint">参数值：大于0的数值,默认：99,设置为1关闭多文件上传<br />说明：本功能需要浏览器支持HTML5上传<br />备注：1.0.0 RC3新添加</pre>
+				</li>
+				<li>
+					<h3>upLinkUrl：超链接文件上传接收URL </h3>
+					<pre class="prettyprint">参数值：接收用户上传的服务器端程序URL，默认留空为禁用超链接上传功能，具体使用方法请参考demo8演示文件<br />注：可使用内置变量：{editorRoot}，代表当前编辑器的根路径，例：{editorRoot}upload.php</pre>
+				</li>
+				<li>
+					<h3>upLinkExt：超链接上传前限制本地文件扩展名 </h3>
+					<pre class="prettyprint">参数值：超链接上传前限制的文件扩展名列表，默认为：zip,rar,txt，建议与服务端扩展名检查列表一致</pre>
+				</li>
+				<li>
+					<h3>upImgUrl：图片文件上传接收URL </h3>
+					<pre class="prettyprint">参数值：接收用户上传的服务器端程序URL，默认留空为禁用上传功能，具体使用方法请参考demo8演示文件<br />注：可使用内置变量：{editorRoot}，代表当前编辑器的根路径，例：{editorRoot}upload.php</pre>
+				</li>
+				<li>
+					<h3>upImgExt：图片上传前限制本地文件扩展名 </h3>
+					<pre class="prettyprint">参数值：图片上传前限制的文件扩展名列表，默认为：jpg,jpeg,gif,png，建议与服务端扩展名检查列表一致</pre>
+				</li>
+				<li>
+					<h3>upFlashUrl：动画文件上传接收URL </h3>
+					<pre class="prettyprint">参数值：接收用户上传的服务器端程序URL，默认留空为禁用上传功能，具体使用方法请参考demo8演示文件<br />注：可使用内置变量：{editorRoot}，代表当前编辑器的根路径，例：{editorRoot}upload.php</pre>
+				</li>
+				<li>
+					<h3>upFlashExt：动画上传前限制本地文件扩展名 </h3>
+					<pre class="prettyprint">参数值：动画上传前限制的文件扩展名列表，默认为：swf，建议与服务端扩展名检查列表一致</pre>
+				</li>
+				<li>
+					<h3>upMediaUrl：视频文件上传接收URL </h3>
+					<pre class="prettyprint">参数值：接收用户上传的服务器端程序URL，默认留空为禁用上传功能，具体使用方法请参考demo8演示文件<br />注：可使用内置变量：{editorRoot}，代表当前编辑器的根路径，例：{editorRoot}upload.php</pre>
+				</li>
+				<li>
+					<h3>upMediaExt：视频上传前限制本地文件扩展名 </h3>
+					<pre class="prettyprint">参数值：视频上传前限制的文件扩展名列表，默认为：avi，建议与服务端扩展名检查列表一致</pre>
+				</li>
+				<li>
+					<h3>onUpload：文件上传成功回调函数 </h3>
+					<pre class="prettyprint">参数值：成功后需要执行的函数<br />说明：这个函数执行时返回的值为上传程序返回的msg变量，可能为字符串或者数组，若为字符串则直接代表url，若是数组，则必需包含一个url的变量，其它可由可开发者自定义<br />备注：1.0.0 beta2新添加</pre>
+				</li>
+				<li>
+					<h3>plugins：自定义按钮之插件扩展 </h3>
+					<pre class="prettyprint">插件对象的属性解释：<br />c：样式表名称<br />t：插件名字(鼠标在按钮上方时显示)<br />s：快捷方式，例："ctrl+enter"<br />h：是否鼠标悬停直接执行,1:直接执行(省略当前值代表不直接执行)<br />e：按钮点击后需要执行的代码(省略执行代码，则把当前的插件名作为参数，调用浏览器的execCommand函数)<br /><br />特别说明：<br />如果您希望样式表存储在系统自带的模板目录ui.css中，请将插件对象的样式名留空，则会自动按照插件名来调用相应的样式，例如：xhEdtBtnCut、xhEdtBtnCopy，其中的Cut和Copy是插件名<br /><br />具体调用方法请参考演示文件夹中的demo9</pre>
+				</li>
+				<li>
+					<h3>submitID：触发表单提交的按钮ID值</h3>
+					<pre class="prettyprint">参数值：表单提交按钮的ID值，默认在form表单上绑定submit以同步结果<br />说明：通过本参数，在非标准submit提交环境下，比如AJAX提交，可以由用户点击提交按钮以触发编辑器最新值的同步<br />备注：v1.1.7新添加</pre>
+				</li>
+				<li>
+					<h3>onPaste：剪切板粘贴回调函数</h3>
+					<pre class="prettyprint">参数值：用户粘贴后需要执行的函数<br />说明：此函数用来过滤用户粘贴的代码，若返回false禁用粘贴<br />备注：v1.1.8新添加</pre>
+				</li>
+				<li>
+					<h3>localUrlTest：非本站域名测试正则表达式</h3>
+					<pre class="prettyprint">参数值：正则表达式<br />说明：本参数用来测试某些组件中测试URL是否属于本站域名<br />备注：v1.1.8新添加</pre>
+				</li>
+				<li>
+					<h3>remoteImgSaveUrl：远程图片抓取接收程序URL</h3>
+					<pre class="prettyprint">参数值：字符串(若不设置不开启此功能)<br />说明：当localUrlTest测试为false时，会将图片URL发往当前参数指定的服务器端上传接收程序，抓取成功后将本地URL返回并替换<br />备注：v1.1.8新添加</pre>
+				</li>
+				<li>
+					<h3>readTip：无障碍读屏提示</h3>
+					<pre class="prettyprint">参数值：字符串(默认为空)<br />说明：无障碍读屏软件提示文字，可用来为残疾人士提示快捷键等信息<br />备注：v1.1.9新添加</pre>
+				</li>
+			</ol><br />
+			<h2><a name="chapter3"></a>2.3. API函数接口列表</h2>
+			<p>API接口示例代码： </p>
+			<pre class="prettyprint">var editor=$('#elm1').xheditor({tools:'full',skin:'default'});<br />editor.focus();<br />editor.setSource('str')<br />sHtml=editor.getSource()<br />editor.appendHTML('&lt;p&gt;aaa&lt;/p&gt;')<br />editor.pasteHTML('&lt;p&gt;aaa&lt;/p&gt;')<br />editor.pasteText('str')<br />sHtml=editor.formatXHTML('&lt;b&gt;aaa&lt;/b&gt;')<br />editor.toggleSource()<br />editor.toggleFullscreen()<br />alert(editor.settings.upImgExt);<br />editor.settings.upImgExt='txt,doc';</pre>
+			<p>API接口列表：</p>
+			<ol>
+				<li>
+					<h3>focus：使编辑器获得焦点 </h3>
+					<pre class="prettyprint">无参数</pre>
+				</li>
+				<li>
+					<h3>setSource：设置编辑器源代码 </h3>
+					<pre class="prettyprint">参数1：要设置的源代码内容，例：'&lt;p&gt;aaa&lt;/p&gt;'</pre>
+				</li>
+				<li>
+					<h3>getSource：返回编辑器格式后的源代码 </h3>
+					<pre class="prettyprint">无参数</pre>
+				</li>
+				<li>
+					<h3>appendHTML：粘贴HTML内容到编辑器结尾处 </h3>
+					<pre class="prettyprint">参数1：要粘贴的HTML代码，例：'&lt;p&gt;uuu&lt;/p&gt;'<br />注：0.9.5版添加</pre>
+				</li>
+				<li>
+					<h3>getSelect：返回当前选中的内容</h3>
+					<pre class="prettyprint">参数1：返回格式，可选'text'返回文本格式，其它所有值都返回HTML格式</pre>
+				</li>
+				<li>
+					<h3>pasteHTML：粘贴HTML内容到编辑器当前光标处</h3>
+					<pre class="prettyprint">参数1：要粘贴的HTML代码，例：'&lt;p&gt;uuu&lt;/p&gt;'<br />参数2：是否覆盖粘贴，留空(覆盖粘贴)、true(粘贴在光标选择区域之前)、false(粘贴在光标选择区域之后)</pre>
+				</li>
+				<li>
+					<h3>pasteText：粘贴文本到编辑器当前光标处</h3>
+					<pre class="prettyprint">参数1：要粘贴的文本，例：'这里的内容完全原样显示&lt;strong&gt;aaa&lt;/strong&gt;'<br />参数2：是否覆盖粘贴，留空(覆盖粘贴)、true(粘贴在光标选择区域之前)、false(粘贴在光标选择区域之后)</pre>
+				</li>
+				<li>
+					<h3>formatXHTML：格式化XHTML代码</h3>
+					<pre class="prettyprint">参数1：需要格式化的HTML代码，例：'&lt;b&gt;aaa&lt;/b&gt;'，返回'&lt;strong&gt;aaa&lt;/strong&gt;'<br />参数2：是否代码缩进换行,true(执行缩进格式化),false(不执行缩进格式化),默认为false</pre>
+				</li>
+				<li>
+					<h3>toggleSource：在源代码模式和编辑模式之间切换</h3>
+					<pre class="prettyprint">参数1：空(切换),true(显示源代码模式),false(显示编辑模式)</pre>
+				</li>
+				<li>
+					<h3>toggleFullscreen：在全屏模式和标准大小之间切换</h3>
+					<pre class="prettyprint">参数1：空(切换),true(显示全屏模式),false(显示标准模式)</pre>
+				</li>
+				<li>
+					<h3>toggleShowBlocktag：切换块标签显示状态</h3>
+					<pre class="prettyprint">参数1：空(切换),true(切换为显示块标签),false(切换为不显示块标签)</pre>
+				</li>
+				<li>
+					<h3>addShortcuts：添加快捷键</h3>
+					<pre class="prettyprint">参数1：快捷键值，例：'ctrl+enter'<br />参数2：用户按下快捷键后需要响应的程序代码，例：function(){$('#frmTest').submit();}<br />说明：允许为某个相同快捷键值重复添加多个响应代码<br />备注：1.0.0 beta2新添加</pre>
+				</li>
+				<li>
+					<h3>delShortcuts：删除快捷键</h3>
+					<pre class="prettyprint">参数1：快捷键值，例：'ctrl+enter'<br /><br />备注：1.0.0 Final新添加</pre>
+				</li>
+				<li>
+					<h3>exec：立即执行按钮及插件</h3>
+					<pre class="prettyprint">参数1：工具按钮名称(不区分大小写)，例：Link、img<br />说明：此函数可以在插件内部或者外部Javascript代码中进行调用</pre>
+				</li>
+				<li>
+					<h3>showModal：显示模式窗口</h3>
+					<pre class="prettyprint">参数1：模式窗口的标题title<br />参数2：模式窗口的内容content<br />参数3：模式窗口的宽度w<br />参数4：模式窗口的高度h<br />参数5：模式窗口关闭时的回调函数onRemove</pre>
+				</li>
+				<li>
+					<h3>showIframeModal：显示iframe式的模式窗口</h3>
+					<pre class="prettyprint">参数1：模式窗口的标题<br />参数2：iframe的地址ifmurl，可使用内置变量：{editorRoot}，代表当前编辑器的根路径，例：{editorRoot}xheditor_plugins/test.html<br />参数3：提供给目标iframe页面回调用的回调函数，可以在iframe页面中以这样的形式调用：callback('1.gif');<br />参数4：模式窗口的宽度w<br />参数5：模式窗口的高度h<br />参数6：模式窗口关闭时的回调函数onRemove</pre>
+				</li>
+				<li>
+					<h3>settings：获取或者修改编辑器内部参数 </h3>
+					<pre class="prettyprint">internalScript:是否清除内部代码<br />inlineScript:是否清除内联代码<br />internalStyle:是否清除内部样式<br />inlineStyle:是否清除内联样式<br />forcePtag:强制使用P标签<br />upLinkUrl:超链接上传接口地址<br />upLinkExt:超链接本地上传扩展限制<br />upImgUrl:图片上传接口地址<br />upImgExt:图片本地上传扩展限制<br />upFlashUrl:动画上传接口地址<br />upFlashExt:动画本地上传扩展限制<br />upMediaUrl:视频上传接口地址<br />upMediaExt:视频本地上传扩展限制<br />beforeSetSource:在设置源代码到编辑器前调用此函数<br />beforeGetSource:从编辑器返回源代码前调用此函数<br />focus:编辑器获得焦点时回调此函数<br />blur:编辑器失去焦点时回调此函数<br /><br />注：修改有效变量仅限以上，其它的变量都仅在编辑器初始化时使用</pre>
+				</li>
+			</ol><br />
+			<h2><a name="chapter4"></a>2.4. 上传程序开发规范</h2>
+			<br /><h3>上传接收程序开发必读：</h3>
+			<ul>
+				<li>
+					上传程序分标准HTML4上传和HTML5上传两种情况处理：<br />
+					1, HTML4上传使用标准的表单上传域，上传文件域的name为：filedata<br />
+					2, HTML5上传的整个POST数据流就是上传的文件完整数据，而本地文件名等信息储存于HTTP_CONTENT_DISPOSITION这个服务器变量中
+				</li>
+				<li>返回内容必需是标准的json字符串，结构可以是如下：{"err":"","msg":"200906030521128703.gif"} 或者 {"err":"","msg":{"url":"200906030521128703.jpg","localfile":"test.jpg","id":"1"}} 注：若选择结构2，则url变量是必有</li>
+			</ul>
+			<p>需了解更多细节，请参考发行包中的demos文件夹。其中upload.php、upload.asp、upload.aspx仅为演示参考代码，若您使用的是其它的服务器脚本语言，请自行对初始化参数中的upLinkUrl、upImgUrl、upFlashUrl和upMediaUrl进行修改，并开发相应服务器上传接收程序。若您希望在自己的项目中实际使用，请自行修改代码或者重新开发，开发过程中请注意上传文件的格式及大小限制，注意服务器脚本安全问题。</p><br />
+			<h3>上传文件管理建议方案：</h3>
+			<ul>
+				<li>在编辑器初始化时在upload.php后面跟上一个服务器生成的绝对唯一的跟踪值，例如：upload.php?infoid=123</li>
+				<li>在服务器接收程序中以这个跟踪值保存到数据库中，同时也可以限制单个跟踪值下总上传文件数或者总文件大小，否则就是一个可以上传无限个文件的漏洞了</li>
+				<li>最终当前表单提交时，再根据编辑器提交的HTML内容和数据库中上传内容进行比较，删除所有没有使用的上传文件</li>
+				<li>定期由服务器脚本删除上传数据库中没提交的文件记录，这样就能防止别人将你的网站作为免费相册空间了</li>
+			</ul><br />
+			<h2><a name="chapter5"></a>2.5. 插件开发指南</h2>
+			<p>标准插件开发流程：</p>
+			<ol>
+				<li>设计插件图标并在页面中定义好CSS</li>
+				<li>定义插件参数并写入初始化参数plugins</li>
+				<li>编写插件调用时要执行的代码</li>
+			</ol>
+			<p>下面我们就demo09中的一个最简单插件作介绍：</p>
+			<pre class="prettyprint">&lt;style type=&quot;text/css&quot;&gt;<br />.testClassName {<br />	background:transparent url(img/plugin.gif) no-repeat 20px 20px;<br />	background-position:3px 3px;<br />}<br />&lt;/style&gt;</pre>
+			<pre class="prettyprint">test7:{c:'testClassName',t:'测试7：showIframeModal (Ctrl+7)',s:'ctrl+7',i:function(editor){
+    editor.setSource('test');
+},e:function(){
+    var _this=this;
+    _this.saveBookmark();
+    _this.showIframeModal('测试showIframeModal接口','uploadgui.html',function(v){
+        _this.loadBookmark();
+        _this.pasteText('返回值：\r\n'+v);
+    },500,300);
+}}
+</pre>
+			<p>这个插件实现的功能是打开一个iframe，并将iframe返回的参数字符串插入到当前编辑器光标处。</p>
+			<ul>
+				<li>其中test7为插件的name，用来在tools初始化参数中调用</li>
+				<li>c:'testClassName'为插件的样式名称</li>
+				<li>t:'测试7：showIframeModal (Ctrl+7)'是鼠标放在按钮上显示的提示文字</li>
+				<li>s:'ctrl+7'是定义插件的快捷方式，在编辑器区域里按设置的快捷方式就会执行此插件事件；</li>
+                <li>i:function(){}为插件初始化函数，编辑器初始化完成后会调用此函数</li>
+				<li>e:function(){}为插件点击后要执行的代码</li>
+			</ul>
+			<p>特别说明：</p>
+			<ol>
+				<li>插件执行函数中可以用this.的方式调用2.3.章节中所有的API接口函数。如果使用回调函数，请将this变量保存在临时变量中，例如_this;</li>
+				<li>在某些浏览器下，打开会转移焦点的操作界面，会导致编辑区域焦点丢失。例如：showIframeModal，在showIframeModal之前要先执行saveBookmark保存焦点，再在回调函数中执行loadBookmark函数恢复焦点，之后才能调用pasteHTML等函数;</li>
+				<li>如果希望样式表存储在系统自带的模板目录ui.css中，请将插件对象样式名留空，则会自动按照插件名来调用相应的样式，例如：xhEdtBtnCut、xhEdtBtnCopy，其中的Cut和Copy是插件名;</li>
+			</ol>
+			<h2><a name="chapter6"></a>2.6. 皮肤设计指南</h2>
+			<p>xhEditor的皮肤保存在xheditor_skin文件夹中，每个皮肤一个子文件夹，文件夹结构如下：</p>
+			<pre class="prettyprint">xheditor_skin<br />  └─default<br />      ├─ui.css<br />      ├─iframe.css<br />      └─img<br />          ├─icons.gif<br />          ├─...<br />          └─loading.gif</pre>
+			<ul>
+				<li>编辑器按钮、面板、模式窗口等样式全部统一存储在ui.css文件中</li>
+				<li>编辑区域的样式存储在iframe.css文件中</li>
+				<li>编辑器内核用到的图片及css文件中用到的所有图片统一存储在img文件夹中</li>
+			</ul>
+			<h3>ui.css文件简单解析</h3>
+			<p>xheLayout：编辑器table样式；xheTool：工具按钮所在区域的样式；xheButton：按钮样式；xhePanel：操作面板的样式；xheMenu：菜单样式；xheEmot：表情样式；xheColor：颜色选择器的样式；xheDialog：面板上的对话框样式；xheModal：模式窗口样式；</p>
+			<p>xhEditor皮肤结构相对非常简单，有一定的HTML和CSS设计基础即可完成设计工作。</p>
+			<h2><a name="chapter7"></a>2.7. 关于二次开发</h2>
+			<p>由于二次开发相对复杂度较高，需要对xhEditor源代码结构熟悉，而开发者的水平有高有低，因此容易出现的问题也五花八门。鉴于这个原因，xhEditor开发团队对非商业授权用户不提供任何的技术文档和技术支持，希望大家理解。</p>
+			<script type="text/javascript">prettyPrint();</script>
+			<div class="pageBottom"><a href="http://weibo.com/yaniswang" target="_blank" title="关注我们"><img src="../img/weibo_s.gif" alt="我们的微博"></a> <span title="Top" onclick="window.scrollTo(0,0);"></span></div>
+		</div>
+		<div id="footer">
+			<div id="footer-body">
+				<div id="copyright">Copyright &copy <a href="http://xheditor.com/" target="_blank">xhEditor.com</a>. All rights reserved. | <a href="http://www.miibeian.gov.cn/" target="_blank">浙ICP备11026403号</a> | <script src="http://s15.cnzz.com/stat.php?id=5179999&web_id=5179999" language="JavaScript"></script></div>
+				<a href="/aboutus.html">关于我们</a> | <a href="/contact.html">联系我们</a> | <a href="/links.html">友情链接</a> | <a href="/contributors.html">贡献者</a> | <a href="http://xheditor.com/" onclick="return addBookmark('xhEditor开源HTML编辑器','http://xheditor.com');" title="xhEditor开源HTML编辑器" rel="sidebar">收藏本站</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

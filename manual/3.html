@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>其它相关 - xhEditor技术手册</title>
+<meta name="description" content="xhEditor是一个基于jQuery开发的简单迷你并且高效的在线可视化HTML编辑器，基于网络访问并且兼容IE 6.0+,Firefox 3.0+,Opera 9.6+,Chrome 1.0+,Safari 3.22+。xhEditor基于Javascript开发，可应用在任何服务端语言环境，如：PHP、ASP.NET、JAVA等。" />
+<meta name="copyright" content="xhEditor.com" />
+<link rel="stylesheet" type="text/css" href="/css/common.css" />
+<style type="text/css">
+#main{
+	margin:20px;
+	border:1px solid #E1E1E1;
+	-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;
+	padding:20px;
+	font-size:14px;
+}
+#main h1,#main h2{
+	margin:0;
+	border-bottom:1px solid #ccc;
+	padding-bottom:3px;
+}
+#main h1{font-size:18px;}
+#main h2{font-size:15px;color:#FF4314;}
+#main h3{margin:0;font-size:13px;}
+#main dl{margin:1em 0 1em 2em;}
+.indexArea{
+	border:1px dashed #ccc;
+	padding:10px;
+	padding-left:40px;
+	background:#F9F9EE;
+	line-height:1.5em;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/js/prettify/prettify.css" />
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/prettify/prettify.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="header-nav">
+				<a href="/">首页</a> | <a href="/about.html">关于xhEditor</a> | <a href="/demo.html">在线演示</a> | <a href="/case.html">成功案例</a> | <a href="/download.html">免费下载</a> | <a href="/wizard.html">参数向导</a> | <a href="/manual.html">技术手册</a> | <a href="/donate.html">捐赠</a>
+			</div>
+			<a href="http://xheditor.com" title="xhEditor开源HTML编辑器"><img src="/img/xheditor-logo.gif" alt="xhEditor" /></a>
+		</div>
+		<div id="main">
+			<h1>3. 其它相关</h1>
+			<dl>
+				<dt>3.1. <a href="/manual/3.html#chapter1">使用常见问题</a></dt>
+			</dl><br />
+			<h2><a name="chapter1"></a>3.1. 使用常见问题</h2>
+			<ol class="indexArea">
+				<li><a href="#uqa1">xhEditor能兼容哪些jQuery版本？</a></li>
+				<li><a href="#uqa2">我的网页是GB2312编码的，怎样才能使xhEditor编辑器没有乱码？</a></li>
+				<li><a href="#uqa3">正常加载了xhEditor，读取textarea的value值，为什么读取不到最新编辑结果？</a></li>
+				<li><a href="#uqa4">怎么添加自定义的表情？</a></li>
+				<li><a href="#uqa5">怎么覆盖编辑器自带的默认表情？</a></li>
+				<li><a href="#uqa6">当前页面设置了document.domain，如何让xhEditor工作正常？</a></li>
+				<li><a href="#uqa7">使用普通表单提交，怎么每次服务端取到的值总是之前旧的编辑结果？</a></li>
+			</ol>
+			<ol>
+				<li>
+					<h3><a name="uqa1"></a>xhEditor能兼容哪些jQuery版本？</h3>
+					<p>xhEditor最初的版本是基于jQuery v1.3.2开发的，因此目前v1.0系列的所有版本都能最大的兼容v1.3.2。为了获得更好的代码性能，目前xhEditor官方更建议使用jQuery v1.4.4版本。</p>
+					<p>虽然说v1.0版本系列能最大的兼容jQuery v1.3.2，但是在实际测试过程中，也发现一个不可修正的问题：在IE6下无法使用缩略图上传模式。如果你不需要使用缩略图模式，可以在jQuery v1.3.2基础上完美的运行xhEditor v1.0版本系列。</p>
+				</li>
+				<li>
+					<h3><a name="uqa2"></a>我的网页是GB2312编码的，怎样才能使xhEditor编辑器没有乱码？</h3>
+					<p>如果使用最新版xhEditor的mini压缩版本，因为里面的文字完全utf-8编码化，可以直接调用，不会出现乱码现象。</p>
+					<p>如果使用的是源代码js文件或早期的xhEditor版本，在非utf-8编码的网页中使用就会出现乱码现象，只需将script的charset属性设置成utf-8即可完美解决：</p>
+					<pre class="prettyprint">&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot; src=&quot;xheditor-zh-cn.js&quot;&gt;&lt;/script&gt;</pre>
+				</li>
+				<li>
+					<h3><a name="uqa3"></a>正常加载了xhEditor，读取textarea的value值，为什么读取不到最新编辑结果？</h3>
+					<p>目前网络中所有的在线编辑器都是利用新创建的iframe来实现可视化编辑功能，xhEditor也不例外，所以在提交前必需要将最新的编辑结果重新同步到原来的textarea。</p>
+					<p>xhEditor默认会在textarea所在的form对象中绑定onsubmit事件，当用户点击submit按钮时，xhEditor就会将最新结果同步回textarea，随后随表单中的其它表单项一同提交到服务端脚本。因此，如果不需要用Javascript额外处理，普通的表单式提交是没任何问题的。</p>
+					<p>
+						如果网页中需要用Javascript额外处理编辑结果，比如ajax提交表单，则有三种解决方案：
+						<ol>
+							<li>使用jQuery的事件绑定或者标准DOM绑定方法在form上绑定submit事件(绑定代码必需在xhEditor初始化代码后面)，即是在xhEditor把值回传后再读取，在相应绑定的函数中读取textarea的value值即是最新编辑结果;</li>
+							<li>使用jQuery的标准取值方法:$('#textarea_id').val();</li>
+							<li>使用xhEditor提供的专用读值API接口：editor.getSource();</li>
+						</ol>
+					</p><br />
+				</li>
+				<li>
+					<h3><a name="uqa4"></a>怎么添加自定义的表情？</h3>
+					<p>可以在初始化参数中使用emots参数来自定义表情，对于emots参数的详细介绍请参考<a href="2#chapter2">2.2. 初始化参数列表</a>。下面我们举一个简单例子：</p>
+					<ol>
+						<li>在xheditor_emot文件夹中新建文件夹：msn</li>
+						<li>在msn文件夹中放置40个表情图片文件，文件名分别为：1.gif 到 40.gif</li>
+						<li>
+							在初始化参数中添加：
+							<pre class="prettyprint">emots:{msn:{name:'MSN',count:40,width:22,height:22,line:8}}</pre>
+							<p>此参数定义了一个名字为msn的表情组，显示名称为：“MSN”，总共40个表情，表情区域的宽度和高度都是22像素，每行8个。</p>
+						</li>
+					</ol>
+				</li>
+				<li>
+					<h3><a name="uqa5"></a>怎么覆盖编辑器自带的默认表情？</h3>
+					<p>只需把自定义表情的名称设置为default，即可覆盖掉编辑器中自带的表情组。下面为操作示例：</p>
+					<ol>
+						<li>删除xheditor_emot文件夹中的default文件夹</li>
+						<li>将自定义的表情文件夹名改为default</li>
+						<li>
+							在初始化参数中添加：
+							<pre class="prettyprint">emots:{'default':{name:'MSN',count:40,width:22,height:22,line:8}}</pre>
+						</li>
+					</ol>
+				</li>
+				<li>
+					<h3><a name="uqa6"></a>当前页面设置了document.domain，如何让xhEditor工作正常？</h3>
+					<p>主要考虑到若要让1.0支持跨域调用，编辑器内核架构变动会非常大，因此目前v1.0版本系列暂时还不支持跨域调用。</p>
+					<p>我们开发团队已经着手规划开发v2.0版本系列，到时会努力提供完美的跨域解决方案，敬请期待。</p>
+				</li>
+				<li>
+					<h3><a name="uqa7"></a>使用普通表单提交，怎么每次服务端取到的值总是之前旧的编辑结果？</h3>
+					<p>如果你使用普通的表单式提交，而非AJAX提交，还是会出现服务端无法读取到最新编辑结果的问题。那么请检查一下你的代码是不是属于以下情况：</p>
+					<ol>
+						<li>
+							如果是以下结构的HTML代码，由于是非标准HTML代码结构，在某些浏览器(例如Firefox)下会导致xhEditor工作不正常：
+							<pre class="prettyprint">&lt;table&gt;&lt;form&gt;&lt;tr&gt;</pre>
+							唯一解决方案：把代码结构改为标准结构：
+							<pre class="prettyprint">&lt;form&gt;&lt;table&gt;&lt;tr&gt;</pre>
+						</li>
+					</ol>
+				</li>
+			</ol><br />
+			<script type="text/javascript">prettyPrint();</script>
+			<div class="pageBottom"><a href="http://weibo.com/yaniswang" target="_blank" title="关注我们"><img src="../img/weibo_s.gif" alt="我们的微博"></a> <span title="Top" onclick="window.scrollTo(0,0);"></span></div>
+		</div>
+		<div id="footer">
+			<div id="footer-body">
+				<div id="copyright">Copyright &copy <a href="http://xheditor.com/" target="_blank">xhEditor.com</a>. All rights reserved. | <a href="http://www.miibeian.gov.cn/" target="_blank">浙ICP备11026403号</a> | <script src="http://s15.cnzz.com/stat.php?id=5179999&web_id=5179999" language="JavaScript"></script></div>
+				<a href="/aboutus.html">关于我们</a> | <a href="/contact.html">联系我们</a> | <a href="/links.html">友情链接</a> | <a href="/contributors.html">贡献者</a> | <a href="http://xheditor.com/" onclick="return addBookmark('xhEditor开源HTML编辑器','http://xheditor.com');" title="xhEditor开源HTML编辑器" rel="sidebar">收藏本站</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

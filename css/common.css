@@ -1,0 +1,68 @@
+@charset "utf-8";
+img{border: 0px;}
+body,form{
+	margin:0;padding:0;
+}
+body{
+	padding:5px 30px;
+	background:#fff;
+	color:#000;
+}
+body,td{font:12px tahoma,arial,sans-serif;}
+a{color:#0000FF;}
+
+#header{
+	padding:0 0 5px 0;
+	position:relative;
+}
+#header span{
+	position:absolute;
+	top:31px;
+	color:#333;
+}
+#header-nav{
+	float:right;
+	margin:30px 0 0 0;
+}
+#main{
+	clear:both;
+}
+#footer{
+	clear:both;
+	padding-top:10px;
+}
+#copyright{
+	float:right;
+}
+
+.pageBottom{text-align:right;}
+.pageBottom span{
+	display:inline-block;
+	width:50px;
+	height:20px;
+	background:url(/img/divide_top.gif);
+	cursor:pointer;
+}
+
+
+.box{
+	border:2px solid #E1E1E1;
+	-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;
+}
+.box h2{
+	margin:5px 0 0 15px;
+	line-height:30px;
+	padding:0 10px;
+	-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;
+	font-size:14px;
+	background:url(/img/boxtitle.gif) no-repeat scroll left center transparent;
+}
+.box h2 a{
+	float:right;
+	font-size:12px;
+}
+
+.clearfloat {
+ 	clear:both;
+	display:block;
+}

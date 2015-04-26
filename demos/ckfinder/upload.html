@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		body, html, iframe, #ckfinder {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="ckfinder.js"></script>
+</head>
+<body>
+	<div id="ckfinder">
+		<script type="text/javascript">
+			(function(win){
+				var get = CKFinder.tools.getUrlParam, tmp;
+				
+				var ckfinder = new CKFinder();
+				ckfinder.width = ckfinder.height = '100%';
+				ckfinder.selectActionFunction = onSelectAction;
+				if ( tmp = get( 'type' ) ){
+					ckfinder.resourceType = tmp;
+				}
+				ckfinder.create();
+				
+				function onSelectAction(fileUrl, data, allFiles){
+					var arrUrl = [];
+					for(var i=0,c=allFiles.length;i<c;i++){
+						arrUrl.push(allFiles[i].url);
+					}
+					if(win.callback){
+						callback('!'+arrUrl.join(' '));
+					}
+				}
+			})(window);
+		</script>
+	</div>
+</body>
+</html>
