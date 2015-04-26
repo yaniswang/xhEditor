@@ -75,14 +75,13 @@ table .even{
 			</div>
 			<p>开发版：</p>
 			<ul id="newdown">
-				<li><img src="img/zip.gif" alt="zip" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.2.1.zip">xhEditor v1.2.1 (简体,繁体,English) (zip)</a> [1225KB] ( <?=_('更新：').date(_('Y年n月j日'),strtotime("2013-2-25"))?> )<br /><span>MD5: E342700D1C68BA670B7DD03962FCEA79</span></li>
-				<li><img src="img/7z.gif" alt="7z" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.2.1.7z">xhEditor v1.2.1 (简体,繁体,English) (7z)</a> [899KB] ( <?=_('更新：').date(_('Y年n月j日'),strtotime("2013-2-25"))?> )<br /><span>MD5: 3B6DFA55667F3B56100A7AA15674632C</span></li>
+				<li><img src="img/zip.gif" alt="zip" align="absmiddle"> <a href="https://github.com/yaniswang/xhEditor/releases/download/1.2.2/xheditor-1.2.2.zip">xhEditor v1.2.2 (简体,繁体,English) (zip)</a> [1225KB] ( 更新：2015-4-26 )</li>
 			</ul>
 			<p>稳定版：</p>
 			<ul id="newdown">
-				<li><img src="img/zip.gif" alt="zip" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.1.14.zip">xhEditor v1.1.14 (简体,繁体,English) (zip)</a> [753KB] ( <?=_('更新：').date(_('Y年n月j日'),strtotime("2012-7-28"))?> )<br /><span>MD5: 4C8F1A87BA99259DEF31385A1BBE9A11</span></li>
-				<li><img src="img/7z.gif" alt="7z" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.1.14.7z">xhEditor v1.1.14 (简体,繁体,English) (7z)</a> [441KB] ( <?=_('更新：').date(_('Y年n月j日'),strtotime("2012-7-28"))?> )<br /><span>MD5: C4863387B8D03ECA3EA70B20D9B7E769</span></li>
-				<li><img src="img/bz2.gif" alt="bz2" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.1.14.tar.bz2">xhEditor v1.1.14 (简体,繁体,English) (tar.bz2)</a> [521KB] ( <?=_('更新：').date(_('Y年n月j日'),strtotime("2012-7-28"))?> )<br /><span>MD5: BD078F02D87B7E6AF22B1025CBABC829</span></li>
+				<li><img src="img/zip.gif" alt="zip" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.1.14.zip">xhEditor v1.1.14 (简体,繁体,English) (zip)</a> [753KB] ( 更新：2012-7-28 )<br /><span>MD5: 4C8F1A87BA99259DEF31385A1BBE9A11</span></li>
+				<li><img src="img/7z.gif" alt="7z" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.1.14.7z">xhEditor v1.1.14 (简体,繁体,English) (7z)</a> [441KB] ( 更新：2012-7-28 )<br /><span>MD5: C4863387B8D03ECA3EA70B20D9B7E769</span></li>
+				<li><img src="img/bz2.gif" alt="bz2" align="absmiddle"> <a href="http://xheditor.googlecode.com/files/xheditor-1.1.14.tar.bz2">xhEditor v1.1.14 (简体,繁体,English) (tar.bz2)</a> [521KB] ( 更新：2012-7-28 )<br /><span>MD5: BD078F02D87B7E6AF22B1025CBABC829</span></li>
 			</ul>
 			<p>镜像下载：</p>
 			<ul id="newdown">
@@ -92,10 +91,9 @@ table .even{
 				<li><a href="http://download.pchome.net/design/homepage/detail-79037.html" target="_blank">PChome 镜像下载点 (xhEditor v1.1.14)</a></li>
 				<li><a href="http://webscripts.softpedia.com/scriptDownload/xhEditor-Download-67895.html" target="_blank">Softpedia (xhEditor v1.1.14)</a></li>
 			</ul>
-			<form method="get" action="showlicense" target="_blank"><p><strong>官方授权认证查询</strong>：<input type="text" name="domain" value="xheditor.com" /> <input type="submit" value="查询" /> <span style="color:#666;">请输入需要查询的网站域名(不包括www)，例如：xheditor.com</span><br /><br /></p></form>
-			<h1><?=str_replace("ver","v1.2.1",_("最新 ver 更新日志:"))?></h1>
-            <ol><li>添加：增加以下三个初始化参数，用以分别定义段落标签、颜色列表、字体大小：listBlocktag、listColors、listFontsize</li><li>添加：添加grunt构建支持，为开放式的代码贡献打下基础</li><li>添加：语言包独立，极大方便今后的开发，同时方便拓展海外市场</li><li>添加：插件添加i参数，作为插件初始化函数，编辑器初始化时，同时会调用此函数</li><li>添加：添加Markdown可视化编辑支持，请查看demo14</li><li>添加：添加IOS6、Android最新浏览器、移动Chrome的富文本支持</li><li>添加：添加CKFinder集成演示</li></ol>
-            <ol><li>修正：粘贴强制转文本模式下，换行丢失问题的修正(感谢luofei614提供修正方案)</li><li>修正：修复IE9第二屏无法选择问题</li><li>修正：修正不支持jQuery 1.9问题，需要引用jquery-migrate</li><li>修正：修正width:'700'参数无效的问题</li><li>修正：修正UBB模块会清除行首全角空格的问题</li></ol>
+			<h1>最新 v1.2.2 更新日志:</h1>
+			<ol><li>添加：添加对jquery 1系列所有版本的兼容，内置$.browser，对以下3个版本进行了测试：1.8.0, 1.9.0, 1.11.2</li></ol>
+            <ol><li>修正：修复不兼容IE11的问题</li></ol>
 			<p><a href="/changelog.html">查看完整历史更新日志...</a></p><br />
 			<h1>xhEditor最新源代码下载(git)</h1>
 			<p><a href="https://github.com/yaniswang/xheditor" target="_blank">https://github.com/yaniswang/xheditor</a></p><br /><br />

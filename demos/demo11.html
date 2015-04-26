@@ -24,7 +24,7 @@ function loadJS(url,callback,charset)
 }
 function initEditor()
 {
-	loadJS("../js/xheditor-1.2.1.min.js",function(){
+	loadJS("../js/xheditor-1.2.2.min.js",function(){
 		loadJS('../js/xheditor_lang/zh-cn.js');
 		$('#elm1').xheditor({shortcuts:{'ctrl+enter':submitForm}});
 		$('#btnInit').hide();
