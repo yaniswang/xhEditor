@@ -2,12 +2,49 @@
  * @license Copyright (c) 2009-2013, xhEditor.com. All rights reserved.
  * For licensing, see LGPL-LICENSE.txt or http://xheditor.com/license/lgpl.txt
  */
+(function($, undefined){
+	if(!$.browser){
+		function uaMatch( ua ) {
+			ua = ua.toLowerCase();
+
+			var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+				/(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+				/(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+				/(msie) ([\w.]+)/.exec( ua ) ||
+				ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+				[];
+
+			return {
+				browser: match[ 1 ] || "",
+				version: match[ 2 ] || "0"
+			};
+		};
+		var matched = uaMatch( navigator.userAgent );
+		var browser = {};
+
+		if ( matched.browser ) {
+			browser[ matched.browser ] = true;
+			browser.version = matched.version;
+		}
+
+		// Chrome is Webkit, but Webkit is also Safari.
+		if ( browser.chrome ) {
+			browser.webkit = true;
+		} else if ( browser.webkit ) {
+			browser.safari = true;
+		}
+
+		$.browser = browser;
+	}
+})(jQuery);
+
 (function(XHEDITOR, $, undefined){
 
 	var agent=navigator.userAgent.toLowerCase();
 	var bMobile=/mobile/i.test(agent),
 		browser=$.browser,browerVer=parseFloat(browser.version),
 		isIE=browser.msie,
+		isIE11 = /trident\//i.test(agent) && (/rv:/i.test(agent) || /Netscape/i.test(agent.appName)),
 		isMozilla=browser.mozilla,
 		isWebkit=browser.webkit,
 		isOpera=browser.opera,
@@ -419,14 +456,14 @@
 		this.setTextCursor=function(bLast)
 		{
 			var rng=_this.getRng(true),cursorNode=_doc.body;
-			if(isIE)rng.moveToElementText(cursorNode);
+			if(isIE || isIE11)rng.moveToElementText(cursorNode);
 			else{
 				var chileName=bLast?'lastChild':'firstChild';
 				while(cursorNode.nodeType!=3&&cursorNode[chileName]){cursorNode=cursorNode[chileName];}
 				rng.selectNode(cursorNode);
 			}
 			rng.collapse(bLast?false:true);
-			if(isIE)rng.select();
+			if(isIE || isIE11)rng.select();
 			else{var sel=_this.getSel();sel.removeAllRanges();sel.addRange(rng);}
 		}
 		this.getSel=function()
@@ -2065,7 +2102,7 @@
 			_this.saveBookmark();
 			var tag=isIE?'pre':'div',jDiv=$('<'+tag+' class="xhe-paste">\uFEFF\uFEFF</'+tag+'>',_doc).appendTo(_doc.body),div=jDiv[0],sel=_this.getSel(),rng=_this.getRng(true);
 			jDiv.css('top',_jWin.scrollTop());
-			if(isIE){
+			if(isIE || isIE11){
 				rng.moveToElementText(div);
 				rng.select();
 				//注：调用execommand:paste，会导致IE8,IE9目标路径无法转为绝对路径

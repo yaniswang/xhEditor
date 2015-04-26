@@ -41,7 +41,6 @@ module.exports = function(grunt) {
               content = content.replace(/@BUILDDATE/g,grunt.template.today("yymmdd"));
             }
             else if(/\.html$/i.test(filename)){
-              
               content = content.replace(/xheditor\.js"/g, pkg.name + '-' + pkg.version + '.min.js"');
             }
             return content;
@@ -49,14 +48,14 @@ module.exports = function(grunt) {
         },
         files: [
           {src: ['dist/<%= pkg.name %>-<%= pkg.version %>.min.js'], dest: 'temp/xheditor-<%= pkg.version %>/<%= pkg.name %>-<%= pkg.version %>.min.js'},
-          {src:['xheditor_lang/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['xheditor_skin/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['xheditor_emot/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['xheditor_plugins/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['demos/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['jquery/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['serverscript/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
-          {src:['CHANGE.md', 'LGPL-LICENSE.txt', 'README.md', 'THANKS.md', 'TODO.md', 'wizard.html'], dest: 'temp/xheditor-<%= pkg.version %>/'}
+          {expand: true, src:['xheditor_lang/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['xheditor_skin/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['xheditor_emot/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['xheditor_plugins/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['demos/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['jquery/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['serverscript/**'], dest: 'temp/xheditor-<%= pkg.version %>/'},
+          {expand: true, src:['CHANGE.md', 'LGPL-LICENSE.txt', 'README.md', 'THANKS.md', 'TODO.md', 'wizard.html'], dest: 'temp/xheditor-<%= pkg.version %>/'}
         ]
       }
     },

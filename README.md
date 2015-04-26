@@ -101,11 +101,17 @@ xhEditor默认基于[LGPL开源许可协议](http://xheditor.com/license/lgpl.tx
 
     npm install grunt-cli -g
     cd xhEditor && npm install
+    grunt -version
 
-确认grunt并构建:
+开发调试
+---------------
+
+    open wizard.html
+    edit src/**
+
+构建并打包zip:
 -----------------
 
-    grunt -version
     grunt
 
 
