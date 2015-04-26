@@ -46,7 +46,7 @@ xhEditor默认基于[LGPL开源许可协议](http://xheditor.com/license/lgpl.tx
 
 1. 下载xhEditor最新版本。
  
-    下载地址：http://xheditor.com/download
+    下载地址：http://xheditor.com/download.html
 
 2. 解压并上传
 
@@ -113,6 +113,6 @@ xhEditor默认基于[LGPL开源许可协议](http://xheditor.com/license/lgpl.tx
 =================
 
 * **官方网站**：[http://xheditor.com/](http://xheditor.com/)
-* **软件下载**：[http://xheditor.com/download](http://xheditor.com/download)
-* **技术手册**：[http://xheditor.com/manual](http://xheditor.com/manual)
-* **问题反馈**：[http://forum.xheditor.com/](http://forum.xheditor.com/)
+* **软件下载**：[http://xheditor.com/download.html](http://xheditor.com/download.html)
+* **技术手册**：[http://xheditor.com/manual.html](http://xheditor.com/manual.html)
+* **问题反馈**：[https://github.com/yaniswang/xhEditor/issues](https://github.com/yaniswang/xhEditor/issues)
